@@ -1,0 +1,24 @@
+<ion-view view-title="Cuponera" hide-back-button="true">
+  <ion-content class="basic-container-list">
+      <div class="card" ng-if="!promoVm.promociones.length" ng-cloak>
+        <div class="item item-text-wrap energized-bg">
+          No existen promociones!
+        </div>
+      </div>
+      <div ng-repeat="promotion in promoVm.promociones"  class="col">
+        <div class="col  promotion" ng-click="promoVm.goToPromotion(promotion)">
+          <div class="responsive-sm">
+              <img ng-if="promoVm.promociones[$index].store.image.url" class="promotion-image" ng-src="{{promoVm.promociones[$index].image.url}}">
+              <img ng-if="!promoVm.promociones[$index].store.image.url" class="promotion-image" src="img/store_image_default.png">
+          </div>
+        </div>
+ 
+      </div>
+    <ion-infinite-scroll
+      ng-if="promoVm.hasMoreData"
+      on-infinite="promoVm.nextPage()"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+  <div ng-include="'templates/footer.html'"></div>
+</ion-view>
